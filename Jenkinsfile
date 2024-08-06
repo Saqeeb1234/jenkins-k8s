@@ -56,9 +56,9 @@ pipeline {
                         aws configure set region ${AWS_REGION}
                         aws s3 ls
                         // aws eks update-kubeconfig --name ${EKS_CLUSTER_NAME} --region ${AWS_REGION}
-                        helm repo add argo https://argoproj.github.io/argo-helm
-                        helm repo update
-                        helm install argocd argo/argo-cd --namespace argocd --create-namespace -f argocd/values.yaml
+                        // helm repo add argo https://argoproj.github.io/argo-helm
+                        // helm repo update
+                        // helm install argocd argo/argo-cd --namespace argocd --create-namespace -f argocd/values.yaml
                         '''
                     }
                 }
