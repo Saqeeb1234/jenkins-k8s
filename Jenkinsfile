@@ -2,6 +2,7 @@ pipeline {
   agent any
 
     environment {
+        KUBECONFIG = credentials('minikube-kubeconfig')
         GIT_REPO_URL = 'https://github.com/Saqeeb1234/jenkins-k8s.git'
     }
 
@@ -19,7 +20,7 @@ pipeline {
         stage('Deploy argcd to cluster'){
             steps{
                 script{
-                    withKubeConfig([credentialsId: 'minikube-kubeconfig']){
+                    withEnv(["KUBECONFIG=${KUBECONFIG}"]){
                         sh'''
                         helm repo add argo https://argoproj.github.io/argo-helm
                         helm repo update
