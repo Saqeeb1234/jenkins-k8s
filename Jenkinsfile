@@ -15,17 +15,17 @@ pipeline {
               }
             }
         }
-    }
 
-    stage('Deploy argcd to cluster'){
-        steps{
-            script{
-                withKubeConfig([credentialsId: 'minikube-kubeconfig']){
-                    sh'''
-                    helm repo add argo https://argoproj.github.io/argo-helm
-                    helm repo update
-                    helm upgrade --install argocd ${HELM_CHART_PATH} --namespace argocd --create-namespace -f argocd/values.yaml
-                    '''
+        stage('Deploy argcd to cluster'){
+            steps{
+                script{
+                    withKubeConfig([credentialsId: 'minikube-kubeconfig']){
+                        sh'''
+                        helm repo add argo https://argoproj.github.io/argo-helm
+                        helm repo update
+                        helm upgrade --install argocd ${HELM_CHART_PATH} --namespace argocd --create-namespace -f argocd/values.yaml
+                        '''
+                    }
                 }
             }
         }
