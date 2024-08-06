@@ -2,9 +2,9 @@ pipeline {
     agent any
 
     parameters {
-        string(name: 'AWS_CREDENTIALS_ID', defaultValue: 'latest', description: 'Provide AWS credentials ID')
-        string(name: 'ClusterName', defaultValue: 'latest', description: 'Provide ClusterName')
-        string(name: 'AWS_REGION', defaultValue: 'latest', description: 'Provide Region, EX: us-west-2')
+        string(name: 'AWS_CREDENTIALS_ID', defaultValue: 'jenkins-user', description: 'Provide AWS credentials ID')
+        string(name: 'ClusterName', defaultValue: 'test-dev', description: 'Provide ClusterName')
+        string(name: 'AWS_REGION', defaultValue: 'ap-south-1', description: 'Provide Region, EX: us-west-2')
     }
 
     environment {
@@ -42,12 +42,10 @@ pipeline {
                             aws configure set aws_access_key_id ${AWS_ACCESS_KEY_ID}
                             aws configure set aws_secret_access_key ${AWS_SECRET_ACCESS_KEY}
                             aws configure set region ${AWS_REGION}
-                            aws s3 ls
-                            # Uncomment the following lines to deploy ArgoCD
-                            # aws eks update-kubeconfig --name ${ClusterName} --region ${AWS_REGION}
-                            # helm repo add argo https://argoproj.github.io/argo-helm
-                            # helm repo update
-                            # helm install argocd argo/argo-cd --namespace argocd --create-namespace -f argocd/values.yaml
+                            aws eks update-kubeconfig --name ${ClusterName} --region ${AWS_REGION}
+                            helm repo add argo https://argoproj.github.io/argo-helm
+                            helm repo update
+                            helm install argocd argo/argo-cd --namespace argocd --create-namespace -f argocd/values.yaml
                         '''
                     }
                 }
