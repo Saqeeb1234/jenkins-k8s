@@ -6,9 +6,13 @@ pipeline {
     }
 
     stages{
-        stage(clone repo){
+        stage('clone repo'){
             steps{
+              script{
+                sh'''
                 git clone "${GIT_REPO_URL}"
+                '''
+              }
             }
         }
     }
