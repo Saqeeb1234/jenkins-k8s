@@ -11,9 +11,9 @@ spec:
       elements:
         name: karpenter-provisioner
         namespace: karpenter
-        repoUrl: https://github.com/aws/karpenter-provider-aws.git
+        repoUrl: https://github.com/Saqeeb1234/jenkins-k8s.git
         targetRevision: main
-        path: charts/karpenter
+        path: cluster-config
   template:
     metadata:
       name: '{{name}}'
