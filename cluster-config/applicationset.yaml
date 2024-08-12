@@ -13,7 +13,7 @@ spec:
         namespace: karpenter
         repoUrl: https://github.com/Saqeeb1234/jenkins-k8s.git
         targetRevision: main
-        path: cluster-config
+        path: cluster-config/
   template:
     metadata:
       name: '{{name}}'
