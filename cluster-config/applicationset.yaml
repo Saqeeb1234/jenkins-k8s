@@ -9,7 +9,7 @@ spec:
   generators:
   - list:
       elements:
-        name: karpenter-provisioner
+      - name: karpenter-provisioner
         namespace: karpenter
         repoUrl: https://github.com/Saqeeb1234/jenkins-k8s.git
         targetRevision: main
