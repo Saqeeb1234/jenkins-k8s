@@ -1,0 +1,44 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: applicationset-applozic
+  namespace: argocd
+  # finalizers:
+  #   - resources-finalizer.argocd.argoproj.io
+spec:
+  syncPolicy:
+    preserveResourcesOnDeletion: false
+  generators:
+  - list:
+      elements:
+        name: karpenter-provisioner
+        namespace: karpenter
+        repoUrl: https://charts.karpenter.sh/
+        targetRevision: main
+        path: karpenter/karpenter
+
+      # - name: brandmessenger-presence-dev
+      #   path: brandmessenger-presence/release/eks.caredev.dev-usw2-01/applozic-dev
+      #   repoURL: git@github.com:lithiumtech/brandmessenger-deployments.git
+      #   revision: master
+      #   namespace: applozic-dev
+      #   releasename: dev-pre
+
+  template:
+    metadata:
+      name: '{{name}}'
+    spec:
+      destination:
+        namespace: '{{namespace}}'
+        server: https://kubernetes.default.svc
+      project: default
+      source:
+        path: '{{path}}'
+        repoURL: '{{repoURL}}'
+        targetRevision: '{{revision}}'
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+        syncOptions:
+        - ApplyOutOfSyncOnly=true
