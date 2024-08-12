@@ -13,17 +13,9 @@ spec:
       elements:
         name: karpenter-provisioner
         namespace: karpenter
-        repoUrl: https://charts.karpenter.sh/
+        repoUrl: https://github.com/aws/karpenter-provider-aws.git
         targetRevision: main
-        path: karpenter
-
-      # - name: brandmessenger-presence-dev
-      #   path: brandmessenger-presence/release/eks.caredev.dev-usw2-01/applozic-dev
-      #   repoURL: git@github.com:lithiumtech/brandmessenger-deployments.git
-      #   revision: master
-      #   namespace: applozic-dev
-      #   releasename: dev-pre
-
+        path: charts/karpenter
   template:
     metadata:
       name: '{{name}}'
@@ -37,8 +29,7 @@ spec:
         repoURL: '{{repoURL}}'
         targetRevision: '{{revision}}'
       syncPolicy:
-        automated:
-          prune: true
-          selfHeal: true
+        automated: {}
         syncOptions:
-        - ApplyOutOfSyncOnly=true
+          - CreateNamespace=true
+
