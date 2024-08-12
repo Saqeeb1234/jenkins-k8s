@@ -15,7 +15,7 @@ spec:
         namespace: karpenter
         repoUrl: https://charts.karpenter.sh/
         targetRevision: main
-        path: karpenter/karpenter
+        path: karpenter
 
       # - name: brandmessenger-presence-dev
       #   path: brandmessenger-presence/release/eks.caredev.dev-usw2-01/applozic-dev
